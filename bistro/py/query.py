@@ -18,11 +18,9 @@ from facebook.bistro.HostportSources import HostportSources
 def query_bistro(args, req):
     hostport = HostportSources.get(args)
     log.debug('Querying Bistro at %s', hostport)
-    r = requests.post('http://{}'.format(hostport), data=json.dumps(req),
-                      timeout=60)
+    r = requests.post(f'http://{hostport}', data=json.dumps(req), timeout=60)
     response = json.loads(r.text)
     assert 'error' not in response, response['error']
     for k in req.keys():
-        assert 'error' not in response[k], \
-            '{}: {}'.format(k, response[k]['error'])
+        assert 'error' not in response[k], f"{k}: {response[k]['error']}"
     return response

@@ -180,11 +180,7 @@ class CmakeDir(object):
         self.cmake_lines = []
 
     def write_cmake_lists(self, path=None, setup_lines=''):
-        if path is None:
-            path = self.name
-        else:
-            path = os.path.join(path, self.name)
-
+        path = self.name if path is None else os.path.join(path, self.name)
         print(path)
         with open(os.path.join(path, 'CMakeLists.txt'), 'w') as f:
             print(setup_lines, end='', file=f)
@@ -193,7 +189,7 @@ class CmakeDir(object):
                 print(l, end='', file=f)
 
             for d in self.dirs:
-                print('add_subdirectory({})'.format(d), file=f)
+                print(f'add_subdirectory({d})', file=f)
 
             # Until this supports thrift_library, add this directory manually.
             if path is self.name:

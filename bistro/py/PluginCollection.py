@@ -33,9 +33,5 @@ class PluginCollection(object):  # abstract
         if 'key_to_obj' not in cls.__dict__:
             cls.key_to_obj = {}
         if key in cls.key_to_obj:
-            raise Exception('Key {} is used both by {} and {}'.format(
-                key,
-                cls.key_to_obj[key],
-                obj
-            ))
+            raise Exception(f'Key {key} is used both by {cls.key_to_obj[key]} and {obj}')
         cls.key_to_obj[key] = obj

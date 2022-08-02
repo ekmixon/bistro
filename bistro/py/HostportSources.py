@@ -19,12 +19,16 @@ class HostportSources(PluginCollection):
     @classmethod
     def usageException(cls):
         return Exception(
-            'You must either pass --hostport, or set the BISTRO_HOSTPORT '
-            'environment variable to "prefix{}value". Valid prefixes:\n{}'
-            .format(cls.SEP, '\n'.join(
-                '  {}{} -- {}'.format(k, cls.SEP, obj.__doc__)
-                    for k, obj in cls.key_to_obj.items()
-            ))
+            (
+                'You must either pass --hostport, or set the BISTRO_HOSTPORT '
+                'environment variable to "prefix{}value". Valid prefixes:\n{}'.format(
+                    cls.SEP,
+                    '\n'.join(
+                        f'  {k}{cls.SEP} -- {obj.__doc__}'
+                        for k, obj in cls.key_to_obj.items()
+                    ),
+                )
+            )
         )
 
     @classmethod

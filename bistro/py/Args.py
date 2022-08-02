@@ -19,7 +19,7 @@ class Args(object):
     @classmethod
     def applyToParser(cls, key, func):
         if key in cls.ACTIONS:
-            raise Exception('Action with key {} already applied'.format(key))
+            raise Exception(f'Action with key {key} already applied')
         cls.ACTIONS[key] = func
         for parser in cls.PARSERS:
             func(parser)
